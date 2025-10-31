@@ -26,7 +26,7 @@ jobs:
         with:
           context: ./frontend/anti-fake-news
           push: true
-          tags: rattikan042/se331-frontend:latest
+          tags: jirapat66/se331-frontend:latest
           
       - name: Create remote frontend directory
         uses: appleboy/ssh-action@v1
