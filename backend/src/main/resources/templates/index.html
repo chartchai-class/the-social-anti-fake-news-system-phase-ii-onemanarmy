@@ -49,18 +49,16 @@
 </div>
 
 <script>
-    // ตรวจสอบว่าเป็น Local หรือ Production
     const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-    // กำหนด URL ตามสภาพแวดล้อม
     const urls = isLocal ? {
         frontend: 'http://localhost:5173/',
         phpAdmin: 'http://localhost:9000/',
         apiNews: 'http://localhost:8080/api/news'
     } : {
-        frontend: 'http://20.198.178.0:8001/',
-        phpAdmin: 'http://20.198.178.0:9000/',
-        apiNews: 'http://20.198.178.0:8999/api/news'
+        frontend: 'http://72.155.72.31:8001/',
+        phpAdmin: 'http://72.155.72.31:9000/',
+        apiNews: 'http://72.155.72.31:8999/api/news'
     };
 
     const links = document.querySelectorAll('a[href]');
