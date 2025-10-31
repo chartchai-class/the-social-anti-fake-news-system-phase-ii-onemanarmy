@@ -31,7 +31,7 @@ services:
       - db
 
   backend:
-    image: rattikan042/se331-backend:latest
+    image: jirapat66/se331-backend:latest
     container_name: backend-backend-1
     ports:
       - "8999:8080"
