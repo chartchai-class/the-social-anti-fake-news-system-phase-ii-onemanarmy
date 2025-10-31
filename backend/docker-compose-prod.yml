@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql
+    container_name: backend-db-1
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: projectII
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-ppassword"]
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: backend-phpmyadmin-1
+    ports:
+      - "9000:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: password
+    depends_on:
+      - db
+
+  backend:
+    image: rattikan042/se331-backend:latest
+    container_name: backend-backend-1
+    ports:
+      - "8999:8080"
+    environment:
+      JAVA_PROFILE: prod,db
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
