@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: 331-backend
+  profiles:
+    active: db
+  datasource:
+
+    url: jdbc:mysql://db:3306/projectII?createDatabaseIfNotExist=true&autoReconnect=true&characterEncoding=UTF-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+supabase:
+  storage:
+    endpoint: https://mainpphpojnagcuvfpqo.storage.supabase.co/storage/v1/s3
+    endpoint_output: https://mainpphpojnagcuvfpqo.storage.supabase.co/storage/v1/object/public
+    bucket: project img
+    region: ap-southeast-1
+    accessKey: 768d163f1e8fb08c0e42c99f434da1ba
+    secretKey: 49762e599f7147bd4caf2c6fde4f16f82b92f0ac439ad1c82de8a6836433179c
+
+application:
+  security:
+    jwt:
+      secret-key: 8dd4852bd1fd1e339fcaca8c4433e0103e5cd33faaf04aa3915f9ecc4eab139117229535b97dac9268da4103268fd03977ddce1613122dfd14e5d0b873a4b7bf
+      expiration: 86400000
