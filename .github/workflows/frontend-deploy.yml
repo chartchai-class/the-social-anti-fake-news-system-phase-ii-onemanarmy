@@ -28,6 +28,12 @@ jobs:
           push: true
           tags: jirapat66/se331-frontend:latest
 
+      - name: Add VM Host Key to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.HOST_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
       - name: Test Network Connection to VM (Port 22)
         run: |
           sudo apt-get install -y netcat-openbsd
