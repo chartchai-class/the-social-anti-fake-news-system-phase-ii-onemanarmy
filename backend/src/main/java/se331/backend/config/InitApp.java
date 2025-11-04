@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Component
 public class InitApp implements CommandLineRunner {
-//commit push 2
+//commit push 3
     @Autowired
     private NewsDao newsDao;
 
