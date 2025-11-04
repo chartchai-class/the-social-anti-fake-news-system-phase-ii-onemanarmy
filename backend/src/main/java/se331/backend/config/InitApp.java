@@ -32,7 +32,7 @@ public class InitApp implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        // เพื่อให้มี User ก่อนสร้าง News
+
         initDefaultUsers();
 
         // สร้าง News
