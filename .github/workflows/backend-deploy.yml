@@ -48,7 +48,7 @@ jobs:
           nc -z -v -w 5 ${{ secrets.HOST_SERVER }} 22
 
       - name: Setup Docker and Create Target Directory
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.1.0
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
