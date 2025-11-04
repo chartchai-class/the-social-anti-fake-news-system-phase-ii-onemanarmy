@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: software.amazon.awssdk:protocol-core:2.25.39" type="java-imported" external-system-id="Maven">
+    <properties groupId="software.amazon.awssdk" artifactId="protocol-core" version="2.25.39" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/software/amazon/awssdk/protocol-core/2.25.39/protocol-core-2.25.39.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/software/amazon/awssdk/protocol-core/2.25.39/protocol-core-2.25.39-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/software/amazon/awssdk/protocol-core/2.25.39/protocol-core-2.25.39-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
