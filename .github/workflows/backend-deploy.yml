@@ -40,7 +40,13 @@ jobs:
           context: ./backend
           push: true
           tags: jirapat66/se331-backend:latest
-          
+
+      - name: Test Network Connection to VM (Port 22)
+        run: |
+          sudo apt-get update && sudo apt-get install -y netcat
+          echo "Attempting to connect to ${{ secrets.HOST_SERVER }} on port 22..."
+          nc -z -v -w 5 ${{ secrets.HOST_SERVER }} 22
+
       - name: Setup Docker and Create Target Directory
         uses: appleboy/ssh-action@v1
         with:
