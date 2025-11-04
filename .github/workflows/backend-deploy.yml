@@ -48,10 +48,11 @@ jobs:
           nc -z -v -w 5 ${{ secrets.HOST_SERVER }} 22
 
       - name: Setup Docker and Create Target Directory
-        uses: appleboy/ssh-action@v1.1.0
+        uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
+          password:
           port: 22
           script: |
             if ! command -v docker &> /dev/null; then
@@ -69,6 +70,7 @@ jobs:
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
+          password:
           port: 22
           source: "backend/docker-compose-prod.yml"
           target: "/home/${{secrets.HOST_USER_NAME}}/backend"
@@ -79,6 +81,7 @@ jobs:
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
+          password:
           port: 22
           script: |
             cd /home/$USER/backend
