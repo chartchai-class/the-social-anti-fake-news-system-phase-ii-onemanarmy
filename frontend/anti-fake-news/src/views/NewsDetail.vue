@@ -6,6 +6,7 @@ import { useAuthStore, type Role } from '../stores/auth';
 import CommentsSection from '../components/CommentsVotes.vue';
 import VoteSection from '../components/VoteSection.vue';
 import apiClient from '../services/NewsService';
+import VoteSummary from '@/components/VoteSummary.vue'
 
 const route = useRoute();
 const notificationStore = useNotificationStore();
@@ -149,6 +150,8 @@ onMounted(() => {
   authStore.hydrateFromStorage();
   loadNewsDetail();
 });
+
+
 </script>
 
 <template>

@@ -6,7 +6,7 @@ services:
     image: mysql
     container_name: backend-db-1
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: projectII
@@ -31,7 +31,7 @@ services:
       - db
 
   backend:
-    image: jirapat66/se331-backend:latest
+    build: .
     container_name: backend-backend-1
     ports:
       - "8999:8080"

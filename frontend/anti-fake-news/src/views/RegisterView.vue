@@ -198,129 +198,202 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-    <div class="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-70">
-
-        <div v-if="messageStore.message"
-            class="fixed top-5 right-5 z-50 p-4 rounded-md shadow-lg text-white transition-all duration-300" :class="messageType === 'success'
-                ? 'bg-green-600'
-                : 'bg-red-600'">
-            {{ messageStore.message }}
-        </div>
-
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <img class="mx-auto h-16 w-auto" src="/logo.png" alt="3Clouds News Logo" />
-        </div>
-
-        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            <div class="bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:px-10">
-
-                <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                    Create your account
-                </h2>
-
-                <!-- Profile Image Upload -->
-                <div class="flex justify-center mt-6 flex-col items-center">
-                    <div class="relative">
-                        <img :src="profilePreview || profileImage || defaultProfile"
-                            class="w-24 h-24 rounded-full object-cover border-2 border-gray-300 cursor-pointer"
-                            @click="triggerFileInput" />
-                        <input type="file" accept="image/*" ref="fileInput" class="hidden"
-                            @change="handleProfileUpload" />
-                    </div>
-                    <p class="text-sm text-gray-500 mt-2 text-center">Upload your profile picture</p>
-                </div>
-
-                <form class="mt-8 space-y-6" @submit.prevent="onSubmit" novalidate>
-                    <div>
-                        <label for="firstname" class="block text-sm font-medium text-left leading-6 text-gray-900">First
-                            Name</label>
-                        <div class="mt-2">
-                            <InputText id="firstname" type="text" v-model="firstname" placeholder="Your First Name"
-                                :error="errors.firstname || undefined" autocomplete="given-name" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="lastname" class="block text-sm font-medium text-left leading-6 text-gray-900">Last
-                            Name</label>
-                        <div class="mt-2">
-                            <InputText id="lastname" type="text" v-model="lastname" placeholder="Your Last Name"
-                                :error="errors.lastname || undefined" autocomplete="family-name" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-left leading-6 text-gray-900">Email
-                            Address</label>
-                        <div class="mt-2 relative">
-                            <InputText id="email" type="email" v-model="email" placeholder="email@example.com"
-                                :error="errors.email || undefined" autocomplete="email" @blur="checkEmailAvailability"
-                                @input="() => setFieldError('email', undefined)" />
-                            <div v-if="isCheckingEmail"
-                                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="username"
-                            class="block text-sm font-medium text-left leading-6 text-gray-900">Username</label>
-                        <div class="mt-2 relative">
-                            <InputText id="username" type="text" v-model="username" placeholder="Choose a username"
-                                :error="errors.username || undefined" autocomplete="username"
-                                @blur="checkUsernameAvailability" @input="() => setFieldError('username', undefined)" />
-                            <div v-if="isCheckingUsername"
-                                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="password"
-                            class="block text-sm font-medium text-left leading-6 text-gray-900">Password</label>
-                        <div class="mt-2">
-                            <InputText id="password" type="password" v-model="password" placeholder="Create a password"
-                                :error="errors.password || undefined" autocomplete="new-password" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="confirmPassword"
-                            class="block text-sm font-medium text-left leading-6 text-gray-900">Confirm Password</label>
-                        <div class="mt-2">
-                            <InputText id="confirmPassword" type="password" v-model="confirmPassword"
-                                placeholder="Confirm your password" :error="errors.confirmPassword || undefined"
-                                autocomplete="new-password" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <button type="submit"
-                            :disabled="isSubmitting || Object.keys(errors).filter(k => k !== 'profileImage').length > 0"
-                            class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm
-         hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600
-         disabled:opacity-50 transition-colors duration-300">
-                            <span v-if="isSubmitting"
-                                class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></span>
-                            Register
-                        </button>
-
-                    </div>
-                </form>
-
-                <p class="mt-8 text-center text-sm text-gray-500">
-                    Already have an account?
-                    {{ ' ' }}
-                    <RouterLink :to="{ name: 'signin' }"
-                        class="font-semibold leading-6 text-blue-600 hover:text-blue-500">
-                        Sign in here
-                    </RouterLink>
-                </p>
-            </div>
-
-        </div>
+  <div
+    class="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gradient-to-b from-black via-gray-900 to-black font-oswald"
+  >
+    <div
+      v-if="messageStore.message"
+      class="fixed top-5 right-5 z-50 p-4 rounded-md shadow-lg text-white transition-all duration-300"
+      :class="messageType === 'success' ? 'bg-green-600' : 'bg-red-600'"
+    >
+      {{ messageStore.message }}
     </div>
-</template>
 
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+      <img class="mx-auto h-16 w-auto" src="/logo.png" alt="One Man Army News Logo" />
+    </div>
+
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+      <div class="bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:px-10">
+        <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Create your account
+        </h2>
+
+        <div class="flex justify-center mt-6 flex-col items-center">
+          <div class="relative">
+            <img
+              :src="profilePreview || profileImage || defaultProfile"
+              class="w-24 h-24 rounded-full object-cover border-2 border-gray-300 cursor-pointer hover:border-nike-orange transition-all"
+              @click="triggerFileInput"
+            />
+            <input
+              type="file"
+              accept="image/*"
+              ref="fileInput"
+              class="hidden"
+              @change="handleProfileUpload"
+            />
+          </div>
+          <p class="text-sm text-gray-500 mt-2 text-center">Upload your profile picture</p>
+        </div>
+
+        <form class="mt-8 space-y-6" @submit.prevent="onSubmit" novalidate>
+          <div>
+            <label
+              for="firstname"
+              class="block text-sm font-medium text-left leading-6 text-gray-900"
+              >First Name</label
+            >
+            <div class="mt-2">
+              <InputText
+                id="firstname"
+                type="text"
+                v-model="firstname"
+                placeholder="Your First Name"
+                :error="errors.firstname || undefined"
+                autocomplete="given-name"
+                class="focus:ring-nike-orange"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="lastname"
+              class="block text-sm font-medium text-left leading-6 text-gray-900"
+              >Last Name</label
+            >
+            <div class="mt-2">
+              <InputText
+                id="lastname"
+                type="text"
+                v-model="lastname"
+                placeholder="Your Last Name"
+                :error="errors.lastname || undefined"
+                autocomplete="family-name"
+                class="focus:ring-nike-orange"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-left leading-6 text-gray-900"
+              >Email Address</label
+            >
+            <div class="mt-2 relative">
+              <InputText
+                id="email"
+                type="email"
+                v-model="email"
+                placeholder="Example@email.com"
+                :error="errors.email || undefined"
+                autocomplete="email"
+                @blur="checkEmailAvailability"
+                @input="() => setFieldError('email', undefined)"
+                class="focus:ring-nike-orange"
+              />
+              <div
+                v-if="isCheckingEmail"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="username"
+              class="block text-sm font-medium text-left leading-6 text-gray-900"
+              >Username</label
+            >
+            <div class="mt-2 relative">
+              <InputText
+                id="username"
+                type="text"
+                v-model="username"
+                placeholder="Choose a username"
+                :error="errors.username || undefined"
+                autocomplete="username"
+                @blur="checkUsernameAvailability"
+                @input="() => setFieldError('username', undefined)"
+                class="focus:ring-nike-orange"
+              />
+              <div
+                v-if="isCheckingUsername"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-left leading-6 text-gray-900"
+              >Password</label
+            >
+            <div class="mt-2">
+              <InputText
+                id="password"
+                type="password"
+                v-model="password"
+                placeholder="Create a password"
+                :error="errors.password || undefined"
+                autocomplete="new-password"
+                class="focus:ring-nike-orange"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              for="confirmPassword"
+              class="block text-sm font-medium text-left leading-6 text-gray-900"
+              >Confirm Password</label
+            >
+            <div class="mt-2">
+              <InputText
+                id="confirmPassword"
+                type="password"
+                v-model="confirmPassword"
+                placeholder="Confirm your password"
+                :error="errors.confirmPassword || undefined"
+                autocomplete="new-password"
+                class="focus:ring-nike-orange"
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              :disabled="
+                isSubmitting || Object.keys(errors).filter((k) => k !== 'profileImage').length > 0
+              "
+              class="flex w-full justify-center rounded-lg bg-nike-orange px-3 py-3 text-sm font-semibold leading-6 text-white shadow-lg hover:bg-nike-yellow hover:text-nike-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 disabled:opacity-50 transition-all duration-300 transform hover:scale-105"
+            >
+              <span
+                v-if="isSubmitting"
+                class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"
+              ></span>
+              Register
+            </button>
+          </div>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-gray-500">
+          Already have an account?
+          {{ ' ' }}
+          <RouterLink
+            :to="{ name: 'signin' }"
+            class="font-semibold leading-6 text-nike-orange hover:text-nike-yellow"
+          >
+            Sign in here
+          </RouterLink>
+        </p>
+      </div>
+    </div>
+  </div>
+</template>

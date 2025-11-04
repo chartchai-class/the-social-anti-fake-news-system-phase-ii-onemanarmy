@@ -166,7 +166,6 @@ const resetForm = () => {
 </script>
 
 <template>
-  <div v-if="news" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
     <div class="bg-gray-100 p-6 rounded-xl">
 
@@ -236,7 +235,7 @@ const resetForm = () => {
         ></textarea>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-6 flex items-center ">
         <ImageUpload v-model="voterImages" :max-files="1" />
       </div>
 
@@ -247,9 +246,9 @@ const resetForm = () => {
       >
         {{ isSubmitting ? 'Submitting...' : 'Submit' }}
       </button>
-    </div>
 
-    <div>
+
+    <!-- <div>
       <div class="bg-white p-6 rounded-xl border">
         <div class="mb-4">
           <h3 class="text-lg font-bold text-gray-800 mb-2">
@@ -287,7 +286,7 @@ const resetForm = () => {
           <span class="text-sm font-semibold text-gray-800">Total: {{ totalVotes }} Votes</span>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
