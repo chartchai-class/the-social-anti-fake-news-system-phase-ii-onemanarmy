@@ -35,12 +35,12 @@ jobs:
           nc -z -v -w 5 ${{ secrets.HOST_SERVER }} 22
 
       - name: Create remote frontend directory
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@master
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
           password: ${{ secrets.HOST_PASSWORD }}
-#          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
+          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
           port: 22
           script: |
             mkdir -p /home/${{secrets.HOST_USER_NAME}}/frontend
@@ -51,7 +51,7 @@ jobs:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
           password: ${{ secrets.HOST_PASSWORD }}
-#          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
+          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
           port: 22
           source: "frontend/anti-fake-news/docker-compose.yml"
           target: "/home/${{secrets.HOST_USER_NAME}}/frontend"
@@ -63,7 +63,7 @@ jobs:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
           password: ${{ secrets.HOST_PASSWORD }}
-#          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
+          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
           port: 22
           script: |
             echo "Checking frontend directory:"
@@ -75,7 +75,7 @@ jobs:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
           password: ${{ secrets.HOST_PASSWORD }}
-#          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
+          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
           port: 22
           script: |
             cd /home/${{secrets.HOST_USER_NAME}}/frontend
