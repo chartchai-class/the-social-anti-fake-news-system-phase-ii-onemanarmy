@@ -52,8 +52,6 @@ jobs:
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
-          password: ${{ secrets.HOST_PASSWORD }}
-          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
           port: 22
           script: |
             if ! command -v docker &> /dev/null; then
@@ -71,8 +69,6 @@ jobs:
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
-          password: ${{ secrets.HOST_PASSWORD }}
-          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
           port: 22
           source: "backend/docker-compose-prod.yml"
           target: "/home/${{secrets.HOST_USER_NAME}}/backend"
@@ -83,8 +79,6 @@ jobs:
         with:
           host: ${{secrets.HOST_SERVER}}
           username: ${{secrets.HOST_USER_NAME}}
-          password: ${{ secrets.HOST_PASSWORD }}
-          key: ${{secrets.HOST_SSH_PRIVATE_KEY}}
           port: 22
           script: |
             cd /home/$USER/backend
