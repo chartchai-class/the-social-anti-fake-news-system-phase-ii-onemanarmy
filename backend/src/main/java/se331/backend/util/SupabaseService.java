@@ -44,7 +44,7 @@ public class SupabaseService {
                 .build();
 
         s3Client.putObject(putObjectRequest, tempFile);
-        
+
         String url = String.format("%s/%s/%s", outputUrl, bucketName, saltFileName);
 
         Files.delete(tempFile);
