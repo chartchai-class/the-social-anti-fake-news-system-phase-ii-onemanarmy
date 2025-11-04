@@ -1,5 +1,5 @@
 services:
   web:
-    image: "onemanarmynews/se331-frontend:latest"
+    image: "jirapat66/se331-frontend:latest"
     ports:
       - "8001:80"
