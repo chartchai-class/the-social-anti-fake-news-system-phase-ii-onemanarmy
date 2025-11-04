@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '21'
-          distribution: 'temurin'  # ← เปลี่ยนจาก adopt เป็น temurin
+          distribution: 'temurin'
           
       - name: Run Maven and Prepare Artifacts 
         working-directory: ./backend
@@ -49,17 +49,14 @@ jobs:
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            # 1. ติดตั้ง Docker (ถ้ายังไม่มี)
             if ! command -v docker &> /dev/null; then
               sudo apt-get update
               sudo apt-get install -y docker.io
               sudo usermod -aG docker $USER
             fi
-            # 2. ติดตั้ง Docker Compose Plugin
             if ! command -v docker compose &> /dev/null; then
               sudo apt-get install -y docker-compose-plugin
             fi
-            # 3. สร้างโฟลเดอร์เป้าหมาย
             mkdir -p /home/$USER/backend
             
       - name: Copy docker-compose via SCP
@@ -83,10 +80,9 @@ jobs:
           script: |
             cd /home/$USER/backend
             
-            # ใช้ชื่อไฟล์ตาม source โดยตรง (ไม่ต้อง rename)
             echo "${{ secrets.DOCKER_HUB_TOKEN }}" | sudo docker login --username "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
             sudo docker compose -f docker-compose-prod.yml down || true
             sudo docker compose -f docker-compose-prod.yml pull
             sudo docker compose -f docker-compose-prod.yml up -d
             
-            echo "✅ Backend deployment completed!"
+            echo "Backend deployment completed!"
